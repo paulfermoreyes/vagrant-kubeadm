@@ -4,11 +4,11 @@
 # Define the number of master and worker nodes
 # If this number is changed, remember to update setup-hosts.sh script with the new hosts IP details in /etc/hosts of each VM.
 NUM_MASTER_NODE = 1
-NUM_WORKER_NODE = 2
+NUM_WORKER_NODE = 3
 
 IP_NW = "192.168.56."
 MASTER_IP_START = 1
-NODE_IP_START = 2
+NODE_IP_START = 3
 
 # ENV["VAGRANT_EXPERIMENTAL"] = "disks"
 
@@ -83,7 +83,7 @@ Vagrant.configure("2") do |config|
         node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
 
         # Only run this when there is an additional volume
-        node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/init-volume.sh"
+        #node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/init-volume.sh"
 
       end
   end 
@@ -118,7 +118,10 @@ Vagrant.configure("2") do |config|
         node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
         
         # Only run this when there is an additional volume
-        node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/init-volume.sh"
+        #node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/init-volume.sh"
+
+	# Run for Kubernetes node prep
+	#node.vm.provision "setup-k8s-node", type: "shell", :path => "ubuntu/init-k8s-node.sh"
     end
   end
 end

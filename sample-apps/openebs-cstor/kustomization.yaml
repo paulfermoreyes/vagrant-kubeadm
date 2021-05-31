@@ -1,0 +1,4 @@
+resources:
+  - storage-pool-claim.yaml
+  - storage-class.yaml
+  - pvc.yaml

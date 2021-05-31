@@ -1,0 +1,25 @@
+#Use the following YAMLs to create a cStor Storage Pool.
+apiVersion: openebs.io/v1alpha1
+kind: StoragePoolClaim
+metadata:
+  name: cstor-pool
+  annotations:
+    cas.openebs.io/config: |
+      - name: PoolResourceRequests
+        value: |-
+            memory: 250Mi
+      - name: PoolResourceLimits
+        value: |-
+            memory: 1Gi
+spec:
+  name: cstor-disk-pool
+  type: disk
+  maxPools: 3
+  minPools: 1
+  poolSpec:
+    poolType: striped
+  blockDevices:
+    blockDeviceList:
+    - blockdevice-2d80998c662f7b73d6f1cafa95ec9a8e
+    - blockdevice-6382f86f71343bfb83373c5a0717de63
+    - blockdevice-be9172137b25a0ac9beff3a91abfd9fb

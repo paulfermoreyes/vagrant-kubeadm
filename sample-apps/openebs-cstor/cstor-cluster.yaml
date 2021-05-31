@@ -1,0 +1,17 @@
+---
+apiVersion: cstor.openebs.io/v1
+kind: CStorPoolCluster
+metadata:
+  name: cspc-mirror-single
+  namespace: openebs
+spec:
+  pools:
+    - nodeSelector:
+        role: worker
+      dataRaidGroups:
+      - blockDevices:
+        - blockDeviceName: "blockdevice-436fae02cd9f27ca1898ac69729a311e"
+        - blockDeviceName: "blockdevice-6382f86f71343bfb83373c5a0717de63"
+        - blockDeviceName: "blockdevice-be9172137b25a0ac9beff3a91abfd9fb"
+      poolConfig:
+        dataRaidGroupType: "mirror"
