@@ -15,16 +15,16 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: wp-cstor-pvc
+  name: wp-openebs-nfs-pvc
   labels:
     app: wordpress
 spec:
-  storageClassName: openebs-sc-statefulset
+  storageClassName: openebs-nfs-sc
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 256Mi
 
 # apiVersion: v1
 # kind: PersistentVolumeClaim
@@ -83,4 +83,4 @@ spec:
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
-          claimName: wp-pv-claim
+          claimName: wp-openebs-nfs-pvc

@@ -66,11 +66,11 @@ Vagrant.configure("2") do |config|
             vb.cpus = 2
 
             # Storage
-            disk = "./disks/masterExtraStorage0#{i}.vdi"
-            unless File.exist?(disk)
-              vb.customize ["createhd", "--filename", disk, "--variant", "fixed", "--size", 5 * 1024]
-            end
-            vb.customize ["storageattach", :id, "--storagectl", "SCSI", "--port", 2, "--device", 0, "--type", "hdd", "--medium", disk]
+            # disk = "./disks/masterExtraStorage0#{i}.vdi"
+            # unless File.exist?(disk)
+            #   vb.customize ["createhd", "--filename", disk, "--variant", "fixed", "--size", 5 * 1024]
+            # end
+            # vb.customize ["storageattach", :id, "--storagectl", "SCSI", "--port", 2, "--device", 0, "--type", "hdd", "--medium", disk]
         end
         node.vm.hostname = "kubemaster"
         node.vm.network :private_network, ip: IP_NW + "#{MASTER_IP_START + i}"
@@ -96,15 +96,21 @@ Vagrant.configure("2") do |config|
             vb.name = "kubenode0#{i}"
             # vb.memory = 1024
             # vb.cpus = 1
-            vb.memory = 2048
+            vb.memory = 3072
             vb.cpus = 2
 
             # Storage
             disk = "./disks/extraStorage0#{i}.vdi"
             unless File.exist?(disk)
-              vb.customize ["createhd", "--filename", disk, "--variant", "fixed", "--size", 5 * 1024]
+              vb.customize ["createhd", "--filename", disk, "--variant", "fixed", "--size", 30 * 1024]
             end
             vb.customize ["storageattach", :id, "--storagectl", "SCSI", "--port", 2, "--device", 0, "--type", "hdd", "--medium", disk]
+
+            # disk = "./disks/extraStorage1#{i}.vdi"
+            # unless File.exist?(disk)
+            #   vb.customize ["createhd", "--filename", disk, "--variant", "fixed", "--size", 10 * 1024]
+            # end
+            # vb.customize ["storageattach", :id, "--storagectl", "SCSI", "--port", 3, "--device", 0, "--type", "hdd", "--medium", disk]
 
         end
         node.vm.hostname = "kubenode0#{i}"

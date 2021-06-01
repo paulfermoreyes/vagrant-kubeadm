@@ -12,21 +12,20 @@ spec:
     tier: mysql
   clusterIP: None
 ---
-
-# kind: PersistentVolumeClaim
-# apiVersion: v1
-# metadata:
-#   name: mysql-cstor-pvc
-#   labels:
-#     app: wordpress
-# spec:
-#   storageClassName: openebs-sc-statefulset
-#   accessModes:
-#     - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 1Gi
-
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: db-openebs-nfs-pvc
+  labels:
+    app: wordpress
+spec:
+  storageClassName: openebs-nfs-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi
+---
 # apiVersion: v1
 # kind: PersistentVolumeClaim
 # metadata:
@@ -82,4 +81,4 @@ spec:
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
-          claimName: mysql-cstor-pvc
+          claimName: db-openebs-nfs-pvc
